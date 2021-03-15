@@ -63,13 +63,13 @@ python test_app.py
 This application has three different roles:
 
 - Basic User
- - can `get:sets`, `get:collectors`
+    - can `get:sets`, `get:collectors`
 - Lego Set Manager
- - has all the permissions `Basic User` has
- - can also `get:sets-detail`, `post:sets`, `patch:sets`, `delete:sets`, `get:collectors-detail`
+    - has all the permissions `Basic User` has
+    - can also `get:sets-detail`, `post:sets`, `patch:sets`, `delete:sets`, `get:collectors-detail`
 - Director
- - has all the permissions `Lego Set Manager` has
- - can also `post:collectors`, `patch:collectors`, `delete:collectors`
+    - has all the permissions `Lego Set Manager` has
+    - can also `post:collectors`, `patch:collectors`, `delete:collectors`
 
 Bearer tokens for `Lego Set Manager` and `Director` are available in the `setup.sh` file.
 
