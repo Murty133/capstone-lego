@@ -1,3 +1,4 @@
+import os
 import json
 from flask import request, _request_ctx_stack
 from functools import wraps
@@ -5,22 +6,24 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'lego-db.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'lego'
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
-## AuthError Exception
+# AuthError Exception
 '''
 AuthError Exception
 A standardized way to communicate auth failure modes
 '''
+
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
 
 
-## Auth Header
+# Auth Header
 def get_token_auth_header():
     if 'Authorization' not in request.headers:
         raise AuthError({
@@ -51,7 +54,7 @@ def check_permissions(permission, payload):
             'code': 'invalid_claims',
             'description': 'Permissions not included in the JWT.'
         }, 400)
-    
+
     if permission not in payload['permissions']:
         raise AuthError({
             'code': 'invalid_claims',
