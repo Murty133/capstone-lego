@@ -7,6 +7,7 @@ from flask import (
     )
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from sqlalchemy.exc import SQLAlchemyError
 from models import (
     db_drop_and_create_all,
     setup_db,
@@ -94,7 +95,7 @@ def create_app(test_config=None):
                 'created': set.short()
                 }), 200
 
-        except:
+        except SQLAlchemyError:
             set.rollback()
             abort(422)
 
@@ -131,7 +132,7 @@ def create_app(test_config=None):
                 'updated': set.long()
                 })
 
-        except:
+        except SQLAlchemyError:
             set.rollback()
             abort(422)
 
@@ -157,7 +158,7 @@ def create_app(test_config=None):
                 'deleted': set_id
                 })
 
-        except:
+        except SQLAlchemyError:
             set.rollback()
             abort(422)
 
@@ -223,7 +224,7 @@ def create_app(test_config=None):
                 'created': collector.long()
                 }), 200
 
-        except:
+        except SQLAlchemyError:
             collector.rollback()
             abort(422)
 
@@ -262,7 +263,7 @@ def create_app(test_config=None):
                 'updated': collector.long()
                 })
 
-        except:
+        except SQLAlchemyError:
             collector.rollback()
             abort(422)
 
@@ -289,7 +290,7 @@ def create_app(test_config=None):
                 'deleted': collector_id
                 })
 
-        except:
+        except SQLAlchemyError:
             collector.rollback()
             abort(422)
 
